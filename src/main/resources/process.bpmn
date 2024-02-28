@@ -6,15 +6,20 @@
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="StartEvent_1" targetRef="say-hello" />
     <bpmn:endEvent id="EndEvent_0x6ir2l">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">
+println "Sum is : " + sum
+</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_16gzt2m</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_16gzt2m" sourceRef="say-hello" targetRef="EndEvent_0x6ir2l" />
-    <bpmn:scriptTask id="say-hello" name="Execute Javascript" scriptFormat="javascript" camunda:resultVariable="resultVar" camunda:resource="externalScript.js">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="inputVar">"inputVariable"</camunda:inputParameter>
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
+    <bpmn:sequenceFlow id="SequenceFlow_16gzt2m" sourceRef="say-hello" targetRef="EndEvent_0x6ir2l">
+      <bpmn:extensionElements />
+    </bpmn:sequenceFlow>
+    <bpmn:scriptTask id="say-hello" name="Execute Groovy Script" scriptFormat="groovy" camunda:resultVariable="resultVar" camunda:resource="myScript.groovy">
+      <bpmn:extensionElements />
       <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_16gzt2m</bpmn:outgoing>
     </bpmn:scriptTask>

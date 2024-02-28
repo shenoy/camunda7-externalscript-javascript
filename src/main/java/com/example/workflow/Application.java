@@ -1,5 +1,6 @@
 package com.example.workflow;
 
+import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,5 +16,6 @@ public class Application implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
     ProcessEngines.getDefaultProcessEngine().getRuntimeService().startProcessInstanceByKey("javascript-process");
+
   }
 }
